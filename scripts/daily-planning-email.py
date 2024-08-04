@@ -11,6 +11,7 @@ from sendgrid.helpers.mail import Mail, Email, To, Bcc, HtmlContent
 
 load_dotenv()
 api_key = os.getenv('API_KEY')
+# Raise an error if API_KEY is not set in the environment variables.
 if not api_key:
     raise ValueError("API_KEY is not set in the environment variables.")
 
@@ -20,13 +21,27 @@ from_email = Email("FROM_EMAIL_ADDRESS")
 
 
 def fetch_data(url):
+    """
+     Fetch data from a URL. This is a wrapper around requests. get that handles authentication
+     
+     @param url - URL to fetch data from
+     
+     @return JSON data from the URL Raises exception if something goes
+    """
     response = requests.get(url, auth=HTTPBasicAuth("why?", "whynot!"))
+    # Returns the JSON response body.
     if response.status_code == 200:
         return response.json()
 
     raise Exception(f"Failed to fetch data: {response.status_code} - {response.content}")
 
 def send_email(data, date_str):
+    """
+     Send email to RECEIVE_EMAIL_ADDRESS and BCC_EMAIL_ADDRESS
+     
+     @param data - list of data to send
+     @param date_str - date of data to send ( YYYYMMDD
+    """
     to_emails = [To("RECEIVE_EMAIL_ADDRESS")]
     bcc_emails = Bcc("BCC_EMAIL_ADDRESS")
     subject = f"???????????????????????? - {date_str} - Count: {len(data)}"
@@ -76,6 +91,7 @@ def send_email(data, date_str):
         <h1>{subject}</h1>
         <div class="card-container">"""
 
+    # Generates the HTML for the person
     for person in data:
         image_url = "EXCEPTION_IMAGE" if person['name'] == "EXCEPTION_USER_NAME" else person['image']
         html_content_str += f""" <div class="card">
@@ -96,6 +112,9 @@ def send_email(data, date_str):
     print(response.status_code, response.body, response.headers)
 
 def main():
+    """
+     Send an email to the person who created the CREAT_YOUR_OWN_JSON
+    """
     json_url = "CREAT_YOUR_OWN_JSON.json"
     data = fetch_data(json_url)
     current_date = datetime.now() + timedelta(days=1)
