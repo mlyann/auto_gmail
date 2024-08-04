@@ -113,9 +113,9 @@ def send_email(data, date_str):
 
 def main():
     """
-     Send an email to the person who created the CREAT_YOUR_OWN_JSON
+     Send an email to the person who created the CREAT_YOUR_OWN_JSON_URL/JSON_FILE
     """
-    json_url = "CREAT_YOUR_OWN_JSON.json"
+    json_url = "CREAT_YOUR_OWN_JSON_URL.json"
     data = fetch_data(json_url)
     current_date = datetime.now() + timedelta(days=1)
     formatted_date = current_date.strftime("%a %b %d")  
