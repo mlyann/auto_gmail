@@ -18,7 +18,7 @@ Cron config:
 pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Minglai Yang
 
 ## License
 For open source projects, say how it is licensed.
