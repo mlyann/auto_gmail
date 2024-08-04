@@ -1,4 +1,4 @@
-# Project Name
+# Auto_Gmail
 
 This is an automated email sending system developed in Python. It fetches data from a specified JSON data source and sends emails to recipients listed.
 
